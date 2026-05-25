@@ -6,7 +6,7 @@ function TodoInfo(props) {
   return (
     <div className="todo__info">
       <div className="todo__total-tasks">
-        Done {done} of {total}
+        Done {done} from {total}
       </div>
       {hasTasks && (
         <button
