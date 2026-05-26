@@ -1,20 +1,27 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import AddTaskForm from "./AddTaskForm";
 import SearchTaskForm from "./SearchTaskForm";
 import TodoInfo from "./TodoInfo";
 import TodoList from "./TodoList";
 
 function Todo() {
-  const [tasks, setTasks] = useState([
-    { id: "task-1", title: "Купить молока", isDone: false },
-    { id: "task-2", title: "Пойти в спортзал", isDone: true },
-  ]);
+  const [tasks, setTasks] = useState(() => {
+    const savedTasks = localStorage.getItem("tasks");
+    if (savedTasks) {
+      return JSON.parse(savedTasks);
+    }
+    return [
+      { id: "task-1", title: "Купить молока", isDone: false },
+      { id: "task-2", title: "Пойти в спортзал", isDone: true },
+    ];
+  });
 
   const [newTaskTitle, setNewTaskTitle] = useState("");
+  const [searchQuery, setSearchQuery] = useState("");
 
   const deleteAllTasks = () => {
-    const isConfirmed = confirm('Вы уверены, что хотите удалить все задачи?');
-    if(isConfirmed) {
+    const isConfirmed = confirm("Вы уверены, что хотите удалить все задачи?");
+    if (isConfirmed) {
       setTasks([]);
     }
   };
@@ -24,30 +31,40 @@ function Todo() {
   };
 
   const toggleTaskComplete = (taskId, isDone) => {
-    setTasks(tasks.map((task) => {
-      if (task.id === taskId) {
-        return { ...task, isDone };
-      }
-      return task;
-    }));
-  };
-
-  const filterTasks = (query) => {
-    console.log(`Search: ${query}`);
+    setTasks(
+      tasks.map((task) => {
+        if (task.id === taskId) {
+          return { ...task, isDone };
+        }
+        return task;
+      }),
+    );
   };
 
   const addTask = () => {
-    if(newTaskTitle.trim().length > 0) {
+    if (newTaskTitle.trim().length > 0) {
       const newTask = {
         id: crypto?.randomUUID() ?? Date.now().toString(),
         title: newTaskTitle,
         isDone: false,
-      }
+      };
       setTasks([...tasks, newTask]);
       setNewTaskTitle("");
+      setSearchQuery("");
     }
   };
 
+  useEffect(() => {
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+  }, [tasks]);
+
+  const clearSearchQuery = searchQuery.trim().toLowerCase();
+  const filteredTasks =
+    clearSearchQuery.length > 0
+      ? tasks.filter(({ title }) =>
+          title.toLowerCase().includes(clearSearchQuery),
+        )
+      : null;
   return (
     <div className="todo">
       <h1 className="todo__title">To Do List</h1>
@@ -56,7 +73,10 @@ function Todo() {
         newTaskTitle={newTaskTitle}
         setNewTaskTitle={setNewTaskTitle}
       />
-      <SearchTaskForm onSearchInput={filterTasks} />
+      <SearchTaskForm
+        searchQuery={searchQuery}
+        setSearchQuery={setSearchQuery}
+      />
       <TodoInfo
         total={tasks.length}
         done={tasks.filter((t) => t.isDone).length}
@@ -64,6 +84,7 @@ function Todo() {
       />
       <TodoList
         tasks={tasks}
+        filteredTasks={filteredTasks}
         onDeleteTaskButtonClick={deleteTask}
         onTaskCompleteChange={toggleTaskComplete}
       />
