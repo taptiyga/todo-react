@@ -1,3 +1,4 @@
+import { memo } from "react";
 import TodoItem from "./TodoItem";
 
 function TodoList(props) {
@@ -25,7 +26,9 @@ function TodoList(props) {
         <TodoItem
           className="todo__item"
           key={task.id}
-          ref={task.id === firstIncompleteTaskId ? firstIncompleteTaskRef : null}
+          ref={
+            task.id === firstIncompleteTaskId ? firstIncompleteTaskRef : null
+          }
           onDeleteButtonClick={onDeleteTaskButtonClick}
           onTaskCompleteChange={onTaskCompleteChange}
           {...task}
@@ -34,4 +37,4 @@ function TodoList(props) {
     </ul>
   );
 }
-export default TodoList;
+export default memo(TodoList);
