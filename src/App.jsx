@@ -4,7 +4,7 @@ import { TasksProvider } from "./context/TasksContext";
 function App() {
   return (
     <TasksProvider>
-      <Todo />;
+      <Todo />
     </TasksProvider>
   );
 }
