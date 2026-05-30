@@ -1,4 +1,4 @@
-import styles from "./Field.module.css";
+import styles from "./Field.module.scss";
 
 function Field(props) {
   const {
@@ -12,7 +12,7 @@ function Field(props) {
     ref,
   } = props;
   return (
-    <div className={`${className} ${styles.field }`}>
+    <div className={`${className} ${styles.field}`}>
       <label className={styles.label} htmlFor={id}>
         {label}
       </label>
