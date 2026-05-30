@@ -1,8 +1,1 @@
-{
-  tasks: [
-    { title: "1", isDone: false, id: "AGxgNhcw8Vw" },
-    { title: "2", isDone: true, id: "uM7c8J4g12g" },
-    { title: "3", isDone: false, id: "TagtbVPTQqA" },
-  ],
-  $schema: "./node_modules/json-server/schema.json",
-}
+{tasks:[{title:'1',isDone:true,id:'z-gfym99Eos'},{title:'2',isDone:true,id:'MhewAMI8JNg'},{title:'3',isDone:true,id:'2owtkL6cLV8'}],$schema:'./node_modules/json-server/schema.json'}
