@@ -1,1 +1,8 @@
-{tasks:[],$schema:'./node_modules/json-server/schema.json'}
+{
+  tasks: [
+    { title: "1", isDone: false, id: "AGxgNhcw8Vw" },
+    { title: "2", isDone: true, id: "uM7c8J4g12g" },
+    { title: "3", isDone: false, id: "TagtbVPTQqA" },
+  ],
+  $schema: "./node_modules/json-server/schema.json",
+}
