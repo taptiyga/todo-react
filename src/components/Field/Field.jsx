@@ -1,3 +1,5 @@
+import styles from "./Field.module.css";
+
 function Field(props) {
   const {
     className = "",
@@ -10,12 +12,12 @@ function Field(props) {
     ref,
   } = props;
   return (
-    <div className={`${className} field`}>
-      <label className="field__label" htmlFor={id}>
+    <div className={`${className} ${styles.field }`}>
+      <label className={styles.label} htmlFor={id}>
         {label}
       </label>
       <input
-        className={`field__input ${error ? "is-invalid" : ""}`}
+        className={`${styles.input} ${error ? styles.isInvalid : ""}`}
         id={id}
         placeholder=" "
         autoComplete="off"
@@ -25,7 +27,7 @@ function Field(props) {
         ref={ref}
       />
       {error && (
-        <span className="field__error" title={error}>
+        <span className={styles.error} title={error}>
           {error}
         </span>
       )}
