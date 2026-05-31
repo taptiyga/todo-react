@@ -1,8 +1,8 @@
 
-import Field from "../../shared/ui/Field/Field";
+import Field from "@/shared/ui/Field/Field";
 import { useContext, useState } from "react";
-import { TasksContext } from "../../entities/todo";
-import Button from "../../shared/ui/Button";
+import { TasksContext } from "@/entities/todo";
+import Button from "@/shared/ui/Button";
 
 
 function AddTaskForm({ styles }) {
