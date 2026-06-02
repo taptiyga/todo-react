@@ -1,4 +1,4 @@
-import {BASE_URL} from "../constants";
+import { BASE_URL } from "../../constants";
 
 function RouterLink(props) {
   const { to, children, ...rest } = props;
